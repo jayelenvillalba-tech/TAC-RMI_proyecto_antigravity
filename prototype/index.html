@@ -1,0 +1,1404 @@
+﻿<!DOCTYPE html>
+<html lang="es-AR" data-theme="">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>SDI – Órdenes TC/RM | H.E. Eva Perón</title>
+<style>
+:root{
+  --pri:#1a5276;--pri-d:#154360;--pri-l:#2980b9;--pri-bg:#ebf5fb;
+  --red:#c0392b;--red-bg:#fdecea;--amb:#b7770d;--amb-bg:#fef3cd;
+  --grn:#1e8449;--grn-bg:#eafaf1;--ora:#d35400;--ora-bg:#fef0e7;
+  --bg:#f0f4f8;--card:#fff;--tx:#1a202c;--mu:#6b7280;--bd:#d1d5db;
+  --bd2:#e5e7eb;--sh:0 1px 3px rgba(0,0,0,.1),0 1px 2px rgba(0,0,0,.06);
+  --sh2:0 4px 6px rgba(0,0,0,.07),0 2px 4px rgba(0,0,0,.06);
+}
+[data-theme="dark"]:root,@media(prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#111827;--card:#1f2937;--tx:#f9fafb;--mu:#9ca3af;--bd:#374151;--bd2:#374151;
+    --pri:#3b82f6;--pri-d:#2563eb;--pri-l:#60a5fa;--pri-bg:#1e3a5f;
+    --red:#f87171;--red-bg:#450a0a;--amb:#fbbf24;--amb-bg:#451a03;
+    --grn:#4ade80;--grn-bg:#052e16;
+  }
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;font-size:15px;
+  line-height:1.5;background:var(--bg);color:var(--tx);min-height:100dvh}
+button,input,select,textarea{font:inherit;color:var(--tx)}
+button{cursor:pointer;border:none;background:transparent}
+
+/* ===== DEMO BANNER ===== */
+.demo-banner{
+  position:sticky;top:0;z-index:9999;
+  background:linear-gradient(135deg,#7b0000,#c0392b);
+  color:#fff;text-align:center;padding:7px 12px 6px;
+  font-size:12px;font-weight:700;letter-spacing:.3px;
+  border-bottom:3px solid #ff0000;
+  box-shadow:0 2px 8px rgba(0,0,0,.4);
+}
+.demo-banner .tz{font-size:10px;font-weight:400;opacity:.85;margin-top:2px}
+
+/* ===== HEADER ===== */
+.app-hdr{
+  background:linear-gradient(135deg,var(--pri-d),var(--pri));
+  color:#fff;padding:12px 16px;
+  display:flex;flex-wrap:wrap;gap:8px 16px;align-items:center;justify-content:space-between;
+  box-shadow:var(--sh2);position:sticky;top:52px;z-index:100;
+}
+.app-hdr h1{font-size:16px;font-weight:700;letter-spacing:.3px}
+.app-hdr p{font-size:11px;opacity:.8;margin-top:1px}
+.rol-wrap{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.rol-wrap label{font-size:12px;opacity:.85;white-space:nowrap}
+.rol-sel{background:rgba(255,255,255,.15);color:#fff;border:1px solid rgba(255,255,255,.3);
+  border-radius:6px;padding:5px 8px;font-size:13px;width:auto;min-width:160px}
+.rol-sel option{background:#1a5276;color:#fff}
+.theme-btn{background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.25);
+  color:#fff;border-radius:6px;padding:5px 9px;font-size:16px;line-height:1}
+
+/* ===== NAV TABS ===== */
+.nav-wrap{
+  background:var(--card);border-bottom:2px solid var(--bd2);
+  overflow-x:auto;white-space:nowrap;
+  position:sticky;top:112px;z-index:99;
+  box-shadow:var(--sh);
+}
+.nav-tabs{display:inline-flex;padding:0 8px}
+.nav-tab{
+  display:inline-flex;align-items:center;gap:5px;
+  padding:10px 14px;font-size:13px;font-weight:500;color:var(--mu);
+  border-bottom:3px solid transparent;margin-bottom:-2px;cursor:pointer;
+  transition:color .15s,border-color .15s;white-space:nowrap;user-select:none;
+}
+.nav-tab:hover{color:var(--pri)}
+.nav-tab.on{color:var(--pri);border-bottom-color:var(--pri);font-weight:600}
+.nav-tab .cnt{
+  background:var(--red);color:#fff;border-radius:99px;
+  font-size:10px;font-weight:700;padding:1px 5px;min-width:17px;text-align:center;
+}
+
+/* ===== MAIN ===== */
+main{max-width:960px;margin:0 auto;padding:16px 12px 80px}
+.hd{display:none!important}
+section{animation:fadeIn .2s ease}
+@keyframes fadeIn{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:translateY(0)}}
+
+/* ===== CARDS ===== */
+.card{background:var(--card);border:1px solid var(--bd2);border-radius:12px;
+  padding:16px;margin-bottom:12px;box-shadow:var(--sh)}
+.card-hdr{display:flex;flex-wrap:wrap;gap:8px;align-items:flex-start;justify-content:space-between;margin-bottom:12px}
+.card-title{font-size:15px;font-weight:600}
+.card-sub{font-size:12px;color:var(--mu);margin-top:2px}
+
+/* ===== DASHBOARD STATS ===== */
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;margin-bottom:16px}
+.stat{background:var(--card);border:1px solid var(--bd2);border-radius:12px;
+  padding:14px;text-align:center;box-shadow:var(--sh)}
+.stat-num{font-size:32px;font-weight:800;color:var(--pri)}
+.stat-lbl{font-size:11px;color:var(--mu);margin-top:3px;font-weight:500}
+
+/* ===== ORDEN CARD ===== */
+.orden-card{
+  background:var(--card);border:1px solid var(--bd2);border-radius:12px;
+  padding:14px;margin-bottom:10px;box-shadow:var(--sh);cursor:pointer;
+  transition:box-shadow .15s,transform .1s;
+}
+.orden-card:hover{box-shadow:var(--sh2);transform:translateY(-1px)}
+.orden-card.implante{border-left:4px solid var(--red)}
+.orden-card.asma{border-left:4px solid var(--amb)}
+.orden-hdr{display:flex;flex-wrap:wrap;gap:6px;align-items:center;justify-content:space-between;margin-bottom:8px}
+.orden-nombre{font-size:15px;font-weight:700}
+.orden-meta{font-size:12px;color:var(--mu);margin-top:2px}
+.orden-body{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:4px 12px}
+.orden-body dt{font-size:11px;color:var(--mu);font-weight:500}
+.orden-body dd{font-size:13px;margin-left:0;font-weight:500}
+
+/* ===== BADGES / ESTADOS ===== */
+.badge{display:inline-flex;align-items:center;gap:3px;
+  font-size:11px;font-weight:600;padding:2px 8px;border-radius:99px;
+  border:1px solid transparent;letter-spacing:.2px;white-space:nowrap}
+.b-pend{background:#f3f4f6;color:#374151;border-color:#d1d5db}
+.b-turno{background:var(--pri-bg);color:var(--pri);border-color:var(--pri)}
+.b-real{background:var(--grn-bg);color:var(--grn);border-color:var(--grn)}
+.b-aus{background:var(--ora-bg);color:var(--ora);border-color:var(--ora)}
+.b-canc,.b-susp{background:var(--red-bg);color:var(--red);border-color:var(--red)}
+.tag{display:inline-flex;align-items:center;gap:3px;
+  font-size:11px;padding:2px 7px;border-radius:99px;
+  background:var(--pri-bg);color:var(--pri);font-weight:500;margin:2px 2px 2px 0}
+
+/* ===== ALERTAS ===== */
+.alerta{border-radius:8px;padding:10px 12px;margin:8px 0;font-size:13px;font-weight:500;
+  border-left:4px solid;display:flex;gap:8px;align-items:flex-start}
+.alerta-impl{background:var(--red-bg);color:var(--red);border-color:var(--red)}
+.alerta-asma{background:var(--amb-bg);color:var(--amb);border-color:var(--amb)}
+.alerta-info{background:var(--pri-bg);color:var(--pri);border-color:var(--pri)}
+.alerta-icon{font-size:16px;flex-shrink:0;margin-top:1px}
+
+/* ===== FORMULARIO ===== */
+.form-section{margin-bottom:20px}
+.form-section-title{font-size:13px;font-weight:700;text-transform:uppercase;
+  letter-spacing:.5px;color:var(--pri);border-bottom:2px solid var(--pri-bg);
+  padding-bottom:6px;margin-bottom:14px}
+.frow{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px 14px;margin-bottom:10px}
+.frow.full{grid-template-columns:1fr}
+.frow.w2{grid-template-columns:1fr 1fr}
+.fg{display:flex;flex-direction:column;gap:4px}
+.fg label{font-size:12px;font-weight:600;color:var(--mu)}
+.fg label .req{color:var(--red);margin-left:2px}
+.fg input,.fg select,.fg textarea{
+  width:100%;border:1.5px solid var(--bd);border-radius:8px;
+  padding:9px 10px;background:var(--bg);color:var(--tx);
+  transition:border-color .15s,box-shadow .15s;
+}
+.fg input:focus,.fg select:focus,.fg textarea:focus{
+  outline:none;border-color:var(--pri);box-shadow:0 0 0 3px rgba(41,128,185,.12)
+}
+.fg input.err,.fg select.err,.fg textarea.err{border-color:var(--red)}
+.fg textarea{min-height:70px;resize:vertical}
+.fg .hint{font-size:11px;color:var(--mu);margin-top:2px}
+
+/* Radio groups */
+.radio-group{display:flex;flex-wrap:wrap;gap:8px;margin-top:4px}
+.radio-opt{
+  display:flex;align-items:center;gap:6px;
+  background:var(--bg);border:1.5px solid var(--bd);border-radius:8px;
+  padding:7px 12px;cursor:pointer;transition:all .15s;
+  font-size:13px;font-weight:500;
+}
+.radio-opt:hover{border-color:var(--pri-l)}
+.radio-opt input[type=radio]{accent-color:var(--pri);width:16px;height:16px}
+.radio-opt.on{border-color:var(--pri);background:var(--pri-bg);color:var(--pri)}
+
+/* ===== BOTONES ===== */
+.btn{display:inline-flex;align-items:center;gap:6px;
+  border-radius:8px;padding:9px 16px;font-size:14px;font-weight:600;
+  transition:all .15s;cursor:pointer;border:2px solid transparent;white-space:nowrap;
+  min-height:40px;
+}
+.btn-pri{background:var(--pri);color:#fff;border-color:var(--pri)}
+.btn-pri:hover{background:var(--pri-d);border-color:var(--pri-d)}
+.btn-sec{background:var(--card);color:var(--pri);border-color:var(--pri)}
+.btn-sec:hover{background:var(--pri-bg)}
+.btn-red{background:var(--red);color:#fff;border-color:var(--red)}
+.btn-red:hover{opacity:.9}
+.btn-ghost{color:var(--mu);border-color:var(--bd)}
+.btn-ghost:hover{background:var(--bg);color:var(--tx)}
+.btn-grn{background:var(--grn);color:#fff;border-color:var(--grn)}
+.btn-grn:hover{opacity:.9}
+.btn-sm{padding:5px 10px;font-size:12px;min-height:30px}
+.btn-lg{padding:12px 24px;font-size:16px;min-height:48px}
+.btns{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:12px}
+
+/* ===== TABLA ===== */
+.tbl-wrap{overflow-x:auto;border-radius:10px;border:1px solid var(--bd2)}
+table{border-collapse:collapse;width:100%;font-size:13px}
+th{background:var(--bg);font-size:11px;font-weight:700;text-transform:uppercase;
+  letter-spacing:.4px;color:var(--mu);padding:10px 12px;
+  border-bottom:2px solid var(--bd2);text-align:left;white-space:nowrap}
+td{padding:10px 12px;border-bottom:1px solid var(--bd2);vertical-align:middle}
+tr:last-child td{border-bottom:none}
+tr:hover td{background:var(--bg)}
+
+/* ===== GRILLA DE TURNOS ===== */
+.grilla-wrap{overflow-x:auto;margin-top:8px}
+.grilla{border-collapse:collapse;font-size:12px;min-width:600px}
+.grilla th{background:var(--pri);color:#fff;padding:8px 10px;font-size:11px;
+  font-weight:700;text-transform:uppercase;letter-spacing:.4px}
+.grilla td{border:1px solid var(--bd2);padding:6px 8px;vertical-align:middle}
+.grilla td.franja{cursor:pointer;transition:all .12s}
+.grilla td.franja:hover{background:var(--pri-bg);transform:scale(1.02)}
+.grilla td.franja.selected{background:var(--pri);color:#fff}
+.grilla td.empty,.grilla td.blocked{background:var(--bg);color:var(--mu);
+  font-size:10px;text-align:center;cursor:not-allowed;opacity:.5}
+.grilla td.past{opacity:.35;cursor:not-allowed}
+.franja-tag{display:inline-block;padding:2px 6px;border-radius:4px;
+  font-size:10px;font-weight:700;text-transform:uppercase;
+  background:var(--pri-bg);color:var(--pri)}
+.franja-tag.sin{background:#ecfdf5;color:#065f46}
+.franja-tag.con{background:#eff6ff;color:#1e40af}
+.franja-tag.anest{background:#fdf4ff;color:#7e22ce}
+.franja-tag.punc{background:#fff7ed;color:#9a3412}
+.franja-tag.res{background:#f0fdf4;color:#14532d}
+.franja-tag.libre{background:#f8fafc;color:#475569}
+.franja-tag.ocu{background:var(--bd2);color:var(--mu);text-decoration:line-through}
+
+/* ===== MODAL ===== */
+.modal-bg{
+  position:fixed;inset:0;z-index:500;
+  background:rgba(0,0,0,.55);backdrop-filter:blur(3px);
+  display:flex;align-items:center;justify-content:center;padding:16px;
+  animation:fadeIn .15s ease;
+}
+.modal{
+  background:var(--card);border-radius:16px;
+  max-width:720px;width:100%;max-height:90dvh;overflow-y:auto;
+  box-shadow:0 20px 60px rgba(0,0,0,.3);
+  animation:slideUp .2s ease;
+}
+@keyframes slideUp{from{transform:translateY(20px);opacity:0}to{transform:translateY(0);opacity:1}}
+.modal-hdr{
+  position:sticky;top:0;background:var(--card);
+  padding:16px 20px 12px;border-bottom:1px solid var(--bd2);
+  display:flex;align-items:center;justify-content:space-between;
+  border-radius:16px 16px 0 0;z-index:1;
+}
+.modal-hdr h2{font-size:17px;font-weight:700}
+.modal-close{font-size:22px;color:var(--mu);line-height:1;padding:4px;border-radius:6px}
+.modal-close:hover{background:var(--bg);color:var(--tx)}
+.modal-body{padding:20px}
+.modal-footer{
+  padding:14px 20px;border-top:1px solid var(--bd2);
+  display:flex;flex-wrap:wrap;gap:8px;justify-content:flex-end;
+  position:sticky;bottom:0;background:var(--card);
+  border-radius:0 0 16px 16px;
+}
+
+/* ===== HISTORIAL ===== */
+.hist-item{display:flex;gap:10px;padding:8px 0;border-bottom:1px solid var(--bd2);font-size:12px}
+.hist-item:last-child{border-bottom:none}
+.hist-dot{width:8px;height:8px;border-radius:50%;background:var(--pri);flex-shrink:0;margin-top:4px}
+.hist-ts{color:var(--mu);white-space:nowrap;font-size:11px}
+
+/* ===== AGENDA ===== */
+.agenda-item{
+  display:flex;gap:12px;padding:12px;
+  background:var(--card);border:1px solid var(--bd2);border-radius:10px;
+  margin-bottom:8px;box-shadow:var(--sh);
+}
+.agenda-hora{font-size:18px;font-weight:800;color:var(--pri);
+  min-width:55px;text-align:center;line-height:1.2}
+.agenda-hora small{display:block;font-size:10px;font-weight:400;color:var(--mu)}
+.agenda-det{flex:1}
+
+/* ===== TOAST ===== */
+.toast-wrap{position:fixed;bottom:20px;right:16px;z-index:9000;display:flex;flex-direction:column;gap:8px;pointer-events:none}
+.toast{
+  background:var(--card);border:1px solid var(--bd2);border-radius:10px;
+  padding:12px 16px;font-size:13px;font-weight:500;
+  box-shadow:0 8px 24px rgba(0,0,0,.15);pointer-events:all;
+  animation:slideUp .2s ease;display:flex;gap:8px;align-items:center;max-width:320px;
+}
+.toast.ok{border-left:4px solid var(--grn);color:var(--grn)}
+.toast.err{border-left:4px solid var(--red);color:var(--red)}
+.toast.info{border-left:4px solid var(--pri);color:var(--pri)}
+
+/* ===== FILTER BAR ===== */
+.filter-bar{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px;align-items:center}
+.filter-bar select,.filter-bar input{
+  border:1.5px solid var(--bd);border-radius:8px;
+  padding:7px 10px;background:var(--card);color:var(--tx);font-size:13px;
+}
+.filter-bar select:focus,.filter-bar input:focus{
+  outline:none;border-color:var(--pri)}
+
+/* ===== EMPTY STATE ===== */
+.empty{text-align:center;padding:40px 20px;color:var(--mu)}
+.empty-icon{font-size:40px;margin-bottom:10px}
+.empty p{font-size:14px}
+
+/* ===== RESPONSIVE ===== */
+@media(max-width:600px){
+  .frow{grid-template-columns:1fr}
+  .frow.w2{grid-template-columns:1fr}
+  .stats{grid-template-columns:repeat(2,1fr)}
+  .btn-lg{width:100%;justify-content:center}
+  .btns{flex-direction:column}
+  .btns .btn{width:100%;justify-content:center}
+}
+
+/* ===== MISC ===== */
+.sep{height:1px;background:var(--bd2);margin:16px 0}
+.mu{color:var(--mu)}
+.sm{font-size:12px}
+dl.dl-grid{display:grid;grid-template-columns:auto 1fr;gap:4px 12px;font-size:13px}
+dl.dl-grid dt{color:var(--mu);font-size:12px;font-weight:500}
+dl.dl-grid dd{font-weight:500}
+.turno-box{background:var(--pri-bg);border:1px solid var(--pri);border-radius:10px;
+  padding:12px 16px;margin:10px 0;color:var(--pri)}
+.turno-box strong{display:block;font-size:15px}
+.wapp-btn{background:#25d366;color:#fff;border:none;border-radius:8px;
+  padding:9px 14px;font-size:13px;font-weight:600;cursor:pointer;
+  display:inline-flex;align-items:center;gap:6px}
+</style>
+</head>
+<body>
+<!-- DEMO BANNER -->
+<div class="demo-banner">
+  ⚠️ MAQUETA DE DEMOSTRACIÓN — SOLO DATOS FICTICIOS — No ingresar datos reales de pacientes
+  <div class="tz">🕐 Los horarios se muestran en UTC. La versión final usará hora de Argentina (UTC-3 / America/Argentina/Buenos_Aires)</div>
+</div>
+
+<!-- HEADER -->
+<header class="app-hdr">
+  <div>
+    <h1>🏥 SDI — H.E. Eva Perón</h1>
+    <p>Servicio de Diagnóstico por Imágenes · Sistema de Órdenes y Turnos TC/RM</p>
+  </div>
+  <div class="rol-wrap">
+    <label>👤 Rol:</label>
+    <select class="rol-sel" id="rolSel" onchange="setRol(this.value)">
+      <option value="medico">Médico de servicio</option>
+      <option value="secretaria">Secretaría (Diagnóstico)</option>
+      <option value="sala">Sala de médicos (Diagnóstico)</option>
+      <option value="anestesia">Anestesia</option>
+      <option value="admin">Jefe / Admin</option>
+    </select>
+    <button class="theme-btn" onclick="toggleTheme()" title="Alternar modo oscuro/claro">🌙</button>
+  </div>
+</header>
+
+<!-- NAV TABS -->
+<nav class="nav-wrap">
+  <div class="nav-tabs" id="navTabs"></div>
+</nav>
+
+<!-- MAIN -->
+<main id="mainContent"></main>
+
+<!-- MODAL CONTAINER -->
+<div id="modals"></div>
+
+<!-- TOAST CONTAINER -->
+<div class="toast-wrap" id="toasts"></div>
+
+<script>// ===================== DATOS =====================
+const SERVICIOS = ['Cirugía','Clínica Médica','Guardia','OyT','Traumatología','Neurología','Pediatría','Ginecología','Cardiología','Otro'];
+const TIPOS_SOL = ['TC','RM','PUNCION','DRENAJE','ETE'];
+const ESTADOS = ['Pendiente','Turno asignado','Realizado','Ausente','Cancelada','Suspendida'];
+const FRANJAS_NO_OFRECER = ['NO DAR','ALMUERZO','CENA',''];
+
+// Grillas de turnos (representativas)
+const GRILLAS = {
+  TC: [
+    {hora:'07:30',lun:'SIN CONTRASTE',mar:'SIN CONTRASTE',mie:'SIN CONTRASTE',jue:'SIN CONTRASTE',vie:'SIN CONTRASTE',sab:'SIN CONTRASTE',dom:''},
+    {hora:'08:00',lun:'CON CONTRASTE',mar:'CON CONTRASTE',mie:'CON CONTRASTE',jue:'CON CONTRASTE',vie:'CON CONTRASTE',sab:'CON CONTRASTE',dom:''},
+    {hora:'08:30',lun:'SIN CONTRASTE',mar:'SIN CONTRASTE',mie:'SIN CONTRASTE',jue:'SIN CONTRASTE',vie:'SIN CONTRASTE',sab:'SIN CONTRASTE',dom:''},
+    {hora:'09:00',lun:'CON CONTRASTE',mar:'CON CONTRASTE',mie:'CON CONTRASTE',jue:'CON CONTRASTE',vie:'CON CONTRASTE',sab:'',dom:''},
+    {hora:'09:30',lun:'RESERVADO INTERNADO',mar:'RESERVADO INTERNADO',mie:'RESERVADO INTERNADO',jue:'RESERVADO INTERNADO',vie:'RESERVADO INTERNADO',sab:'',dom:''},
+    {hora:'10:00',lun:'SIN CONTRASTE',mar:'SIN CONTRASTE',mie:'SIN CONTRASTE',jue:'SIN CONTRASTE',vie:'SIN CONTRASTE',sab:'',dom:''},
+    {hora:'10:30',lun:'CON CONTRASTE',mar:'CON CONTRASTE',mie:'CON CONTRASTE',jue:'CON CONTRASTE',vie:'CON CONTRASTE',sab:'',dom:''},
+    {hora:'11:00',lun:'PUNCION',mar:'PUNCION',mie:'PUNCION',jue:'PUNCION',vie:'PUNCION',sab:'',dom:''},
+    {hora:'11:30',lun:'DRENAJES',mar:'DRENAJES',mie:'DRENAJES',jue:'DRENAJES',vie:'DRENAJES',sab:'',dom:''},
+    {hora:'12:00',lun:'ANESTESIA',mar:'ANESTESIA',mie:'ANESTESIA',jue:'ANESTESIA',vie:'ANESTESIA',sab:'',dom:''},
+    {hora:'12:30',lun:'ALMUERZO',mar:'ALMUERZO',mie:'ALMUERZO',jue:'ALMUERZO',vie:'ALMUERZO',sab:'ALMUERZO',dom:''},
+    {hora:'13:00',lun:'RESERVADO INTERNADO',mar:'RESERVADO INTERNADO',mie:'RESERVADO INTERNADO',jue:'RESERVADO INTERNADO',vie:'RESERVADO INTERNADO',sab:'',dom:''},
+    {hora:'13:30',lun:'SIN CONTRASTE',mar:'SIN CONTRASTE',mie:'SIN CONTRASTE',jue:'SIN CONTRASTE',vie:'SIN CONTRASTE',sab:'',dom:''},
+    {hora:'14:00',lun:'CON CONTRASTE',mar:'CON CONTRASTE',mie:'CON CONTRASTE',jue:'CON CONTRASTE',vie:'CON CONTRASTE',sab:'',dom:''},
+    {hora:'14:30',lun:'SIN CONTRASTE',mar:'SIN CONTRASTE',mie:'SIN CONTRASTE',jue:'SIN CONTRASTE',vie:'SIN CONTRASTE',sab:'',dom:''},
+    {hora:'15:00',lun:'CON CONTRASTE',mar:'CON CONTRASTE',mie:'CON CONTRASTE',jue:'CON CONTRASTE',vie:'CON CONTRASTE',sab:'',dom:''},
+    {hora:'15:30',lun:'ANESTESIA',mar:'ANESTESIA',mie:'ANESTESIA',jue:'ANESTESIA',vie:'ANESTESIA',sab:'',dom:''},
+    {hora:'16:00',lun:'RESERVADO INTERNADO',mar:'RESERVADO INTERNADO',mie:'RESERVADO INTERNADO',jue:'RESERVADO INTERNADO',vie:'RESERVADO INTERNADO',sab:'',dom:''},
+    {hora:'16:30',lun:'SIN CONTRASTE',mar:'SIN CONTRASTE',mie:'SIN CONTRASTE',jue:'SIN CONTRASTE',vie:'SIN CONTRASTE',sab:'',dom:''},
+    {hora:'17:00',lun:'CON CONTRASTE',mar:'CON CONTRASTE',mie:'CON CONTRASTE',jue:'CON CONTRASTE',vie:'NO DAR',sab:'',dom:''},
+    {hora:'17:30',lun:'PUNCION',mar:'PUNCION',mie:'PUNCION',jue:'PUNCION',vie:'NO DAR',sab:'',dom:''},
+    {hora:'18:00',lun:'DRENAJES',mar:'DRENAJES',mie:'DRENAJES',jue:'DRENAJES',vie:'NO DAR',sab:'',dom:''}
+  ],
+  RM: [
+    {hora:'07:30',lun:'SIN GADOLINIO',mar:'SIN GADOLINIO',mie:'SIN GADOLINIO',jue:'SIN GADOLINIO',vie:'SIN GADOLINIO',sab:'SIN GADOLINIO',dom:''},
+    {hora:'08:00',lun:'CON GADOLINIO',mar:'CON GADOLINIO',mie:'CON GADOLINIO',jue:'CON GADOLINIO',vie:'CON GADOLINIO',sab:'CON GADOLINIO',dom:''},
+    {hora:'08:30',lun:'SIN GADOLINIO',mar:'SIN GADOLINIO',mie:'SIN GADOLINIO',jue:'SIN GADOLINIO',vie:'SIN GADOLINIO',sab:'SIN GADOLINIO',dom:''},
+    {hora:'09:00',lun:'CON GADOLINIO',mar:'CON GADOLINIO',mie:'CON GADOLINIO',jue:'CON GADOLINIO',vie:'CON GADOLINIO',sab:'',dom:''},
+    {hora:'09:30',lun:'RESERVADO INTERNADO',mar:'RESERVADO INTERNADO',mie:'RESERVADO INTERNADO',jue:'RESERVADO INTERNADO',vie:'RESERVADO INTERNADO',sab:'',dom:''},
+    {hora:'10:00',lun:'SIN GADOLINIO',mar:'SIN GADOLINIO',mie:'SIN GADOLINIO',jue:'SIN GADOLINIO',vie:'SIN GADOLINIO',sab:'',dom:''},
+    {hora:'10:30',lun:'CON GADOLINIO',mar:'CON GADOLINIO',mie:'CON GADOLINIO',jue:'CON GADOLINIO',vie:'CON GADOLINIO',sab:'',dom:''},
+    {hora:'11:00',lun:'ANESTESIA',mar:'ANESTESIA',mie:'ANESTESIA',jue:'ANESTESIA',vie:'ANESTESIA',sab:'',dom:''},
+    {hora:'11:30',lun:'SIN GADOLINIO',mar:'SIN GADOLINIO',mie:'SIN GADOLINIO',jue:'SIN GADOLINIO',vie:'SIN GADOLINIO',sab:'',dom:''},
+    {hora:'12:00',lun:'RESERVADO INTERNADO',mar:'RESERVADO INTERNADO',mie:'RESERVADO INTERNADO',jue:'RESERVADO INTERNADO',vie:'RESERVADO INTERNADO',sab:'',dom:''},
+    {hora:'12:30',lun:'ALMUERZO',mar:'ALMUERZO',mie:'ALMUERZO',jue:'ALMUERZO',vie:'ALMUERZO',sab:'ALMUERZO',dom:''},
+    {hora:'13:00',lun:'CON GADOLINIO',mar:'CON GADOLINIO',mie:'CON GADOLINIO',jue:'CON GADOLINIO',vie:'CON GADOLINIO',sab:'',dom:''},
+    {hora:'13:30',lun:'SIN GADOLINIO',mar:'SIN GADOLINIO',mie:'SIN GADOLINIO',jue:'SIN GADOLINIO',vie:'SIN GADOLINIO',sab:'',dom:''},
+    {hora:'14:00',lun:'ANESTESIA',mar:'ANESTESIA',mie:'ANESTESIA',jue:'ANESTESIA',vie:'ANESTESIA',sab:'',dom:''},
+    {hora:'14:30',lun:'CON GADOLINIO',mar:'CON GADOLINIO',mie:'CON GADOLINIO',jue:'CON GADOLINIO',vie:'CON GADOLINIO',sab:'',dom:''},
+    {hora:'15:00',lun:'SIN GADOLINIO',mar:'SIN GADOLINIO',mie:'SIN GADOLINIO',jue:'SIN GADOLINIO',vie:'SIN GADOLINIO',sab:'',dom:''},
+    {hora:'15:30',lun:'RESERVADO INTERNADO',mar:'RESERVADO INTERNADO',mie:'RESERVADO INTERNADO',jue:'RESERVADO INTERNADO',vie:'RESERVADO INTERNADO',sab:'',dom:''},
+    {hora:'16:00',lun:'CON GADOLINIO',mar:'CON GADOLINIO',mie:'CON GADOLINIO',jue:'CON GADOLINIO',vie:'CON GADOLINIO',sab:'',dom:''},
+    {hora:'16:30',lun:'SIN GADOLINIO',mar:'SIN GADOLINIO',mie:'SIN GADOLINIO',jue:'SIN GADOLINIO',vie:'SIN GADOLINIO',sab:'',dom:''},
+    {hora:'17:00',lun:'ANESTESIA',mar:'ANESTESIA',mie:'ANESTESIA',jue:'ANESTESIA',vie:'NO DAR',sab:'',dom:''},
+    {hora:'17:30',lun:'SIN GADOLINIO',mar:'SIN GADOLINIO',mie:'SIN GADOLINIO',jue:'SIN GADOLINIO',vie:'NO DAR',sab:'',dom:''},
+    {hora:'18:00',lun:'CON GADOLINIO',mar:'CON GADOLINIO',mie:'CON GADOLINIO',jue:'CON GADOLINIO',vie:'NO DAR',sab:'',dom:''}
+  ]
+};
+
+// Datos demo precargados
+const DEMO_ORDENES = [
+  {id:'o1',num:'2026-001',f:'2026-09-26',nombre:'GARCÍA ROMERO, Juan Carlos',dni:'30.111.222',hc:'HC-44521',fn:'1962-03-15',edad:64,peso:82,dom:'Av. San Martín 1420',loc:'Granadero Baigorria',tel:'341-5551234',os:'IAPOS',proc:'CONS_EXTERNO',serv:'Cirugía',efector:'H.E. Eva Perón',medico:'Dr. Alejandro Pérez',mat:'12345',efect:'H.E. Eva Perón',est1:'TC de tórax',est2:'',contraste:'No',anest:'No',motivo:'Nódulo pulmonar incidental en Rx',diag:'Nódulo pulmonar',examPrev:'Sí',obs:'Traer Rx de tórax previa',tipo:'Ambulatorio',sala:'',cama:'',renal:'No',renalC:'',asma:'No',claus:'No',impl:'No',implC:'',rmPrev:'No',rmFecha:'',estado:'Pendiente',h:[{ts:'2026-09-26 09:15',u:'Dr. Pérez',m:'Orden creada'}]},
+  {id:'o2',num:'2026-002',f:'2026-09-27',nombre:'RODRÍGUEZ VEGA, María Elena',dni:'27.333.444',hc:'HC-33210',fn:'1979-07-22',edad:47,peso:68,dom:'Calle 9 de Julio 540',loc:'Rosario',tel:'341-5559876',os:'PAMI',proc:'INTERNACION',serv:'Clínica Médica',efector:'H.E. Eva Perón',medico:'Dra. Sofía Ruiz',mat:'67890',efect:'H.E. Eva Perón',est1:'RM de encéfalo',est2:'',contraste:'Sí',anest:'No',motivo:'ACV isquémico reciente',diag:'ACV isquémico',examPrev:'No',obs:'',tipo:'Internado',sala:'Sala 3',cama:'18B',renal:'Sí',renalC:'Insuficiencia renal crónica estadio 3',asma:'No',claus:'No',impl:'No',implC:'',rmPrev:'Sí',rmFecha:'2025-11-10',estado:'Pendiente',h:[{ts:'2026-09-27 10:30',u:'Dra. Ruiz',m:'Orden creada'}]},
+  {id:'o3',num:'2026-003',f:'2026-09-27',nombre:'LÓPEZ SUÁREZ, Carlos Alberto',dni:'25.555.666',hc:'HC-51103',fn:'1975-11-03',edad:50,peso:91,dom:'Córdoba 780 2°B',loc:'Rosario',tel:'341-5554321',os:'Particular',proc:'CONS_EXTERNO',serv:'Traumatología',efector:'H.E. Eva Perón',medico:'Dr. Luis Romero',mat:'23456',efect:'H.E. Eva Perón',est1:'RM de rodilla derecha',est2:'',contraste:'No',anest:'No',motivo:'Lesión de menisco',diag:'Probable rotura meniscal',examPrev:'Sí',obs:'',tipo:'Ambulatorio',sala:'',cama:'',renal:'No',renalC:'',asma:'No',claus:'No',impl:'Sí',implC:'Prótesis de cadera izquierda (acero inoxidable)',rmPrev:'Sí',rmFecha:'2024-05-20',estado:'Turno asignado',turno:{fecha:'2026-10-05',hora:'10:00',mod:'RM',franja:'SIN GADOLINIO'},h:[{ts:'2026-09-27 11:00',u:'Dr. Romero',m:'Orden creada'},{ts:'2026-09-28 08:45',u:'Secretaría',m:'Turno asignado: RM 2026-10-05 10:00 (SIN GADOLINIO)'}]},
+  {id:'o4',num:'2026-004',f:'2026-09-28',nombre:'FERNÁNDEZ LUNA, Ana Lucía',dni:'33.777.888',hc:'HC-62341',fn:'1993-05-18',edad:33,peso:55,dom:'Maipú 340',loc:'Rosario',tel:'341-5557654',os:'OSDE',proc:'GUARDIA',serv:'Guardia',efector:'H.E. Eva Perón',medico:'Dr. Marcos Torres',mat:'34567',efect:'H.E. Eva Perón',est1:'TC de encéfalo',est2:'TC de columna cervical',contraste:'Sí',anest:'No',motivo:'Traumatismo de cráneo con pérdida de conciencia',diag:'TCE moderado',examPrev:'No',obs:'Paciente agitada, posible necesidad de sedación',tipo:'Internado',sala:'Guardia',cama:'G-4',renal:'No',renalC:'',asma:'Sí',claus:'No',impl:'No',implC:'',rmPrev:'No',rmFecha:'',estado:'Pendiente',h:[{ts:'2026-09-28 03:20',u:'Dr. Torres',m:'Orden creada - URGENTE'}]},
+  {id:'o5',num:'2026-005',f:'2026-09-28',nombre:'SÁNCHEZ VIDAL, Roberto Ariel',dni:'20.999.111',hc:'HC-28876',fn:'1956-08-30',edad:70,peso:76,dom:'Pellegrini 1100',loc:'Rosario',tel:'341-5553210',os:'PAMI',proc:'INTERNACION',serv:'Cardiología',efector:'H.E. Eva Perón',medico:'Dra. Elena Gómez',mat:'45678',efect:'H.E. Eva Perón',est1:'TC de tórax con contraste',est2:'',contraste:'Sí',anest:'No',motivo:'Masa mediastinal',diag:'Masa mediastinal en estudio',examPrev:'Sí',obs:'',tipo:'Internado',sala:'Sala 1',cama:'5A',renal:'Sí',renalC:'Creatinina elevada - hidratación previa requerida',asma:'Sí',claus:'No',impl:'Sí',implC:'Marcapasos DDD (Medtronic, modelo Sigma DR)',rmPrev:'No',rmFecha:'',estado:'Turno asignado',turno:{fecha:'2026-10-01',hora:'08:00',mod:'TC',franja:'CON CONTRASTE'},h:[{ts:'2026-09-28 09:00',u:'Dra. Gómez',m:'Orden creada'},{ts:'2026-09-29 10:15',u:'Sala de médicos',m:'Turno asignado: TC 2026-10-01 08:00 (CON CONTRASTE)'}]},
+  {id:'o6',num:'2026-006',f:'2026-09-29',nombre:'MARTÍNEZ RÍOS, Valeria Soledad',dni:'35.222.333',hc:'HC-71200',fn:'1999-02-14',edad:27,peso:62,dom:'Ovidio Lagos 220',loc:'Rosario',tel:'341-5556789',os:'IAPOS',proc:'INTERNACION',serv:'Neurología',efector:'H.E. Eva Perón',medico:'Dr. Pablo Herrera',mat:'56789',efect:'H.E. Eva Perón',est1:'RM de encéfalo',est2:'RM de columna cervical',contraste:'Sí',anest:'Sí',motivo:'Esclerosis múltiple - control anual',diag:'Esclerosis múltiple remitente-recidivante',examPrev:'Sí',obs:'Claustrofobia severa, requiere anestesia general',tipo:'Internado',sala:'Sala 5',cama:'12C',renal:'No',renalC:'',asma:'No',claus:'Sí',impl:'No',implC:'',rmPrev:'Sí',rmFecha:'2025-09-15',estado:'Pendiente',visAnes:false,h:[{ts:'2026-09-29 11:45',u:'Dr. Herrera',m:'Orden creada - requiere ANESTESIA por claustrofobia'}]},
+  {id:'o7',num:'2026-007',f:'2026-09-29',nombre:'DIAZ PEREYRA, Héctor Manuel',dni:'22.444.555',hc:'HC-39540',fn:'1968-12-01',edad:57,peso:88,dom:'San Lorenzo 890',loc:'Funes',tel:'341-5554567',os:'Galeno',proc:'CONS_EXTERNO',serv:'OyT',efector:'H.E. Eva Perón',medico:'Dra. Carmen Vidal',mat:'78901',efect:'H.E. Eva Perón',est1:'TC guiada por imagen - biopsia hepática',est2:'',contraste:'No',anest:'No',motivo:'Nódulo hepático hallazgo incidental',diag:'Nódulo hepático inespecífico',examPrev:'Sí',obs:'Estudios de coagulación dentro de parámetros',tipo:'Ambulatorio',sala:'',cama:'',renal:'No',renalC:'',asma:'No',claus:'No',impl:'No',implC:'',rmPrev:'No',rmFecha:'',estado:'Pendiente',h:[{ts:'2026-09-29 14:00',u:'Dra. Vidal',m:'Orden creada - PUNCIÓN'}]},
+  {id:'o8',num:'2026-008',f:'2026-09-30',nombre:'TOLEDO IBÁÑEZ, Graciela',dni:'28.666.777',hc:'HC-55123',fn:'1972-04-25',edad:54,peso:70,dom:'Av. Pellegrini 2340',loc:'Rosario',tel:'341-5558901',os:'Swiss Medical',proc:'CONS_EXTERNO',serv:'Cardiología',efector:'H.E. Eva Perón',medico:'Dr. Martín Solís',mat:'89012',efect:'H.E. Eva Perón',est1:'ETE (Ecocardiograma Transesofágico)',est2:'',contraste:'No',anest:'No',motivo:'Sospecha de endocarditis',diag:'Endocarditis infecciosa en estudio',examPrev:'No',obs:'Ayuno 6 hs previo',tipo:'Ambulatorio',sala:'',cama:'',renal:'No',renalC:'',asma:'No',claus:'No',impl:'No',implC:'',rmPrev:'No',rmFecha:'',estado:'Pendiente',h:[{ts:'2026-09-30 08:30',u:'Dr. Solís',m:'Orden creada'}]}
+];
+
+// ===================== ESTADO =====================
+let ROL = 'medico';
+let VISTA = 'dashboard';
+let ORDENES = [];
+let TURNO_PENDIENTE = null; // orden en proceso de asignación de turno
+let DETALLE_ID = null;
+
+// ===================== PERSISTENCIA =====================
+function cargarDatos() {
+  try {
+    const raw = localStorage.getItem('tac_rmi_v3');
+    if (raw) {
+      ORDENES = JSON.parse(raw);
+    } else {
+      ORDENES = JSON.parse(JSON.stringify(DEMO_ORDENES));
+      guardarDatos();
+    }
+  } catch(e) {
+    ORDENES = JSON.parse(JSON.stringify(DEMO_ORDENES));
+  }
+}
+function guardarDatos() {
+  localStorage.setItem('tac_rmi_v3', JSON.stringify(ORDENES));
+}
+function resetDemo() {
+  if (!confirm('¿Resetear todos los datos al estado inicial de demostración?')) return;
+  localStorage.removeItem('tac_rmi_v3');
+  ORDENES = JSON.parse(JSON.stringify(DEMO_ORDENES));
+  guardarDatos();
+  render();
+  toast('Datos reseteados al estado inicial', 'ok');
+}
+
+// ===================== UTILIDADES =====================
+const esc = s => String(s??'').replace(/[&<>"']/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const $ = id => document.getElementById(id);
+const nowStr = () => new Date().toISOString().replace('T',' ').slice(0,16)+' UTC';
+const hoy = () => new Date().toISOString().slice(0,10);
+const diasSemana = ['dom','lun','mar','mie','jue','vie','sab'];
+
+function formatFecha(iso) {
+  if (!iso) return '—';
+  const [y,m,d] = iso.split('-');
+  return `${d}/${m}/${y}`;
+}
+function formatHora(h) {
+  return h || '—';
+}
+function diaSemNom(n) {
+  return ['Dom','Lun','Mar','Mié','Jue','Vie','Sáb'][n];
+}
+
+function badgeEstado(estado) {
+  const cls = {
+    'Pendiente':'b-pend','Turno asignado':'b-turno',
+    'Realizado':'b-real','Ausente':'b-aus',
+    'Cancelada':'b-canc','Suspendida':'b-susp'
+  };
+  const ico = {
+    'Pendiente':'⏳','Turno asignado':'📅','Realizado':'✅',
+    'Ausente':'⚠️','Cancelada':'❌','Suspendida':'🚫'
+  };
+  return `<span class="badge ${cls[estado]||'b-pend'}">${ico[estado]||''} ${esc(estado)}</span>`;
+}
+
+function tagFranja(f) {
+  const cls = {
+    'SIN CONTRASTE':'sin','CON CONTRASTE':'con','SIN GADOLINIO':'sin',
+    'CON GADOLINIO':'con','ANESTESIA':'anest','PUNCION':'punc',
+    'DRENAJES':'punc','RESERVADO INTERNADO':'res','Libre':'libre'
+  };
+  return `<span class="franja-tag ${cls[f]||''}">${esc(f)}</span>`;
+}
+
+function alertasSeguridad(o) {
+  let html = '';
+  if (o.impl === 'Sí') html += `<div class="alerta alerta-impl"><span class="alerta-icon">🔴</span><div><strong>IMPLANTES METÁLICOS</strong><br>Requisito fundamental: traer constancia de compatibilidad con firma y sello del médico tratante (tipo de material). Sin este documento el estudio <strong>NO se realiza</strong>.<br><em>Tipo: ${esc(o.implC)}</em></div></div>`;
+  if (o.asma === 'Sí') html += `<div class="alerta alerta-asma"><span class="alerta-icon">🟡</span><div><strong>ASMA / ALERGIA SEVERA</strong><br>Avisar al médico antes de administrar contraste.</div></div>`;
+  if (o.renal === 'Sí') html += `<div class="alerta alerta-info"><span class="alerta-icon">🔵</span><div><strong>ANTECEDENTE RENAL:</strong> ${esc(o.renalC||'—')}</div></div>`;
+  if (o.claus === 'Sí') html += `<div class="alerta alerta-info"><span class="alerta-icon">ℹ️</span><div><strong>CLAUSTROFOBIA</strong> — Informar al servicio.</div></div>`;
+  if (o.contraste === 'Sí' && (o.est1||'').toLowerCase().includes('oral')) html += `<div class="alerta alerta-info"><span class="alerta-icon">⏱️</span><div><strong>CONTRASTE ORAL:</strong> Citar al paciente <strong>30 minutos antes</strong> del turno.</div></div>`;
+  return html;
+}
+
+function tagsOrden(o) {
+  let t = '';
+  if (o.contraste === 'Sí') t += `<span class="tag">💊 Contraste</span>`;
+  if (o.anest === 'Sí') t += `<span class="tag">💉 Anestesia</span>`;
+  if (o.claus === 'Sí') t += `<span class="tag">😰 Claustrofobia</span>`;
+  if (o.rmPrev === 'Sí') t += `<span class="tag">📋 RM previa</span>`;
+  if (o.renal === 'Sí') t += `<span class="tag">🫘 Ant. renal</span>`;
+  if (o.impl === 'Sí') t += `<span class="tag" style="background:var(--red-bg);color:var(--red)">⚠️ Implantes</span>`;
+  return t;
+}
+
+function toast(msg, tipo='info') {
+  const t = $('toasts');
+  const d = document.createElement('div');
+  d.className = `toast ${tipo}`;
+  const icons = {ok:'✅',err:'❌',info:'ℹ️'};
+  d.innerHTML = `<span>${icons[tipo]||'ℹ️'}</span>${esc(msg)}`;
+  t.appendChild(d);
+  setTimeout(() => d.remove(), 4000);
+}
+
+// ===================== ROLES Y PERMISOS =====================
+const ROLES_PERMS = {
+  medico:      {puedeCrear:true, veAmb:true, veInt:true, gestionaAmb:false, gestionaInt:false, veAnestesia:false, admin:false},
+  secretaria:  {puedeCrear:true, veAmb:true, veInt:true, gestionaAmb:true,  gestionaInt:false, veAnestesia:false, admin:false},
+  sala:        {puedeCrear:true, veAmb:true, veInt:true, gestionaAmb:false, gestionaInt:true,  veAnestesia:false, admin:false},
+  anestesia:   {puedeCrear:false,veAmb:false,veInt:false,gestionaAmb:false, gestionaInt:false, veAnestesia:true,  admin:false},
+  admin:       {puedeCrear:true, veAmb:true, veInt:true, gestionaAmb:true,  gestionaInt:true,  veAnestesia:true,  admin:true}
+};
+
+function perm(key) {
+  return ROLES_PERMS[ROL]?.[key] ?? false;
+}
+
+function setRol(rol) {
+  ROL = rol;
+  render();
+}
+
+// ===================== NAVEGACIÓN =====================
+const VISTAS_CONFIG = [
+  {id:'dashboard', icon:'🏠', label:'Inicio', roles:['medico','secretaria','sala','anestesia','admin']},
+  {id:'nueva-orden', icon:'➕', label:'Nueva Orden', roles:['medico','secretaria','sala','admin']},
+  {id:'ambulatorios', icon:'🚶', label:'Ambulatorios', roles:['medico','secretaria','sala','admin'], badge:'amb'},
+  {id:'internados', icon:'🛏️', label:'Internados', roles:['medico','secretaria','sala','admin'], badge:'int'},
+  {id:'agenda', icon:'📅', label:'Agenda del Día', roles:['medico','secretaria','sala','anestesia','admin']},
+  {id:'anestesia', icon:'💉', label:'Anestesia', roles:['anestesia','sala','admin']},
+  {id:'demanda', icon:'📊', label:'Demanda', roles:['admin']}
+];
+
+function renderNav() {
+  const nav = $('navTabs');
+  const pendAmb = ORDENES.filter(o => o.tipo === 'Ambulatorio' && o.estado === 'Pendiente').length;
+  const pendInt = ORDENES.filter(o => o.tipo === 'Internado' && o.estado === 'Pendiente').length;
+  nav.innerHTML = VISTAS_CONFIG
+    .filter(v => v.roles.includes(ROL))
+    .map(v => {
+      const cnt = v.badge === 'amb' ? pendAmb : v.badge === 'int' ? pendInt : 0;
+      const badge = (v.badge && cnt > 0) ? `<span class="cnt">${cnt}</span>` : '';
+      return `<div class="nav-tab ${VISTA === v.id ? 'on' : ''}" onclick="irA('${v.id}')">${v.icon} ${v.label}${badge}</div>`;
+    }).join('');
+}
+
+function irA(vista) {
+  VISTA = vista;
+  DETALLE_ID = null;
+  render();
+}
+
+// ===================== LÓGICA DE FRANJAS =====================
+function franjaRequerida(o) {
+  if (o.est1 && o.est1.toLowerCase().includes('puncion')) return 'PUNCION';
+  if (o.est1 && o.est1.toLowerCase().includes('drenaje')) return 'DRENAJES';
+  if (o.est1 && o.est1.toLowerCase().includes('ete')) return null; // libre
+  if (o.tipo_sol === 'PUNCION') return 'PUNCION';
+  if (o.tipo_sol === 'DRENAJE') return 'DRENAJES';
+  if (o.tipo_sol === 'ETE') return null;
+  const es_rm = o.modalidad === 'RM' || o.est1?.toUpperCase().includes('RM');
+  const es_tc = !es_rm;
+  if (o.anest === 'Sí') return 'ANESTESIA';
+  if (es_rm) return o.contraste === 'Sí' ? 'CON GADOLINIO' : 'SIN GADOLINIO';
+  return o.contraste === 'Sí' ? 'CON CONTRASTE' : 'SIN CONTRASTE';
+}
+
+function modalidadOrden(o) {
+  if (!o) return 'TC';
+  const s = (o.est1||'').toUpperCase();
+  if (s.includes('RM') || s.includes('RESONANCIA') || s.includes('MRI')) return 'RM';
+  return 'TC';
+}
+
+function getFranjasDisponibles(o, fechaISO) {
+  const mod = modalidadOrden(o);
+  const grilla = GRILLAS[mod] || [];
+  const frReq = franjaRequerida(o);
+  const esInternado = o.tipo === 'Internado';
+  const fecha = new Date(fechaISO + 'T00:00:00Z');
+  const diaSem = diasSemana[fecha.getUTCDay()];
+  const ahora = new Date();
+  const esHoy = fechaISO === hoy();
+
+  // Turnos ya ocupados ese día
+  const ocupados = ORDENES
+    .filter(x => x.turno && x.estado === 'Turno asignado' && x.turno.fecha === fechaISO && x.turno.mod === mod && x.id !== o.id)
+    .map(x => x.turno.hora);
+
+  return grilla
+    .filter(slot => {
+      const franja = slot[diaSem] || '';
+      // No ofrecer franjas bloqueadas
+      if (FRANJAS_NO_OFRECER.includes(franja)) return false;
+      // No ofrecer pasadas si es hoy
+      if (esHoy) {
+        const [hh,mm] = slot.hora.split(':');
+        const slotMs = new Date(fechaISO + 'T' + slot.hora + ':00Z');
+        if (slotMs <= ahora) return false;
+      }
+      // No ofrecer ocupadas
+      if (ocupados.includes(slot.hora)) return false;
+      // Filtrar por tipo de franja requerida
+      if (frReq) {
+        if (franja === 'RESERVADO INTERNADO') return esInternado;
+        return franja === frReq;
+      }
+      return true;
+    })
+    .map(slot => ({hora: slot.hora, franja: slot[diaSem]}));
+}
+// ===================== RENDER VISTAS =====================
+function render() {
+  renderNav();
+  const c = $('mainContent');
+  if (DETALLE_ID) {
+    renderDetalle(DETALLE_ID);
+    return;
+  }
+  switch(VISTA) {
+    case 'dashboard': renderDashboard(c); break;
+    case 'nueva-orden': renderNuevaOrden(c); break;
+    case 'ambulatorios': renderCola(c, 'Ambulatorio'); break;
+    case 'internados': renderCola(c, 'Internado'); break;
+    case 'agenda': renderAgenda(c); break;
+    case 'anestesia': renderAnestesia(c); break;
+    case 'demanda': renderDemanda(c); break;
+    default: renderDashboard(c);
+  }
+}
+
+function renderDashboard(c) {
+  const ambPend = ORDENES.filter(o => o.tipo === 'Ambulatorio' && o.estado === 'Pendiente').length;
+  const intPend = ORDENES.filter(o => o.tipo === 'Internado' && o.estado === 'Pendiente').length;
+  const h = hoy();
+  const turnosHoyTC = ORDENES.filter(o => o.turno?.fecha === h && o.turno?.mod === 'TC' && o.estado === 'Turno asignado').length;
+  const turnosHoyRM = ORDENES.filter(o => o.turno?.fecha === h && o.turno?.mod === 'RM' && o.estado === 'Turno asignado').length;
+  const anestPend = ORDENES.filter(o => o.anest === 'Sí' && o.visAnes === false).length;
+
+  c.innerHTML = `
+    <div class="stats">
+      <div class="stat" style="border-top:4px solid var(--pri);">
+        <div class="stat-num">${ambPend}</div>
+        <div class="stat-lbl">Ambulatorios Pendientes</div>
+      </div>
+      <div class="stat" style="border-top:4px solid var(--amb);">
+        <div class="stat-num">${intPend}</div>
+        <div class="stat-lbl">Internados Pendientes</div>
+      </div>
+      <div class="stat" style="border-top:4px solid var(--grn);">
+        <div class="stat-num">${turnosHoyTC}</div>
+        <div class="stat-lbl">Turnos TC Hoy</div>
+      </div>
+      <div class="stat" style="border-top:4px solid #8e44ad;">
+        <div class="stat-num">${turnosHoyRM}</div>
+        <div class="stat-lbl">Turnos RM Hoy</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-hdr">
+        <div>
+          <div class="card-title">Bienvenido al Sistema de Gestión de Imágenes</div>
+          <div class="card-sub">Rol activo: <strong>${ROL.toUpperCase()}</strong></div>
+        </div>
+        <button class="btn btn-ghost btn-sm" onclick="resetDemo()">↺ Reiniciar Datos Demo</button>
+      </div>
+      <p class="sm mu">Prototipo funcional evaluando flujo de derivación, auditoría, alertas clínicas y asignación estricta de franjas horarias según Form 599.</p>
+      
+      <div class="btns" style="margin-top:16px">
+        ${perm('puedeCrear') ? `<button class="btn btn-pri" onclick="irA('nueva-orden')">➕ Cargar Nueva Orden</button>` : ''}
+        ${perm('veAmb') ? `<button class="btn btn-sec" onclick="irA('ambulatorios')">🚶 Cola Ambulatorios (${ambPend})</button>` : ''}
+        ${perm('veInt') ? `<button class="btn btn-sec" onclick="irA('internados')">🛏️ Cola Internados (${intPend})</button>` : ''}
+        <button class="btn btn-sec" onclick="irA('agenda')">📅 Ver Agenda del Día</button>
+        ${ROL === 'anestesia' || ROL === 'admin' ? `<button class="btn btn-sec" onclick="irA('anestesia')">💉 Panel de Anestesia ${anestPend > 0 ? `<span class="badge b-canc">${anestPend} novedades</span>` : ''}</button>` : ''}
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title" style="margin-bottom:12px;">Últimas Órdenes Registradas</div>
+      ${renderListaOrdenes(ORDENES.slice(-5).reverse())}
+    </div>
+  `;
+}
+
+function renderListaOrdenes(lista) {
+  if (!lista.length) return `<div class="empty"><div class="empty-icon">📂</div><p>No hay órdenes en esta lista.</p></div>`;
+  return lista.map(o => `
+    <div class="orden-card ${o.impl === 'Sí' ? 'implante' : (o.asma === 'Sí' ? 'asma' : '')}" onclick="verDetalle('${o.id}')">
+      <div class="orden-hdr">
+        <div>
+          <span class="orden-nombre">${esc(o.nombre)}</span>
+          <span class="mu sm">· DNI ${esc(o.dni)} · HC ${esc(o.hc||'S/D')}</span>
+          <div class="orden-meta">${esc(o.serv)} · ${esc(o.tipo)} ${o.tipo==='Internado'? `(Sala: ${esc(o.sala||'-')}, Cama: ${esc(o.cama||'-')})`:''}</div>
+        </div>
+        <div>${badgeEstado(o.estado)}</div>
+      </div>
+      <div style="margin: 6px 0;">
+        <span class="tag" style="background:#e8f4f8;color:#1a5276;font-weight:bold;">${esc(o.est1 || o.tipo_sol || 'Estudio')}</span>
+        ${tagsOrden(o)}
+      </div>
+      ${o.turno ? `<div class="sm" style="color:var(--pri);font-weight:600;margin-top:4px;">📅 Turno: ${formatFecha(o.turno.fecha)} a las ${o.turno.hora} hs (${esc(o.turno.franja)})</div>` : ''}
+      ${o.impl === 'Sí' ? `<div class="sm" style="color:var(--red);font-weight:bold;margin-top:4px;">⚠️ ALERTA IMPLANTE: Requiere constancia física firmada.</div>` : ''}
+    </div>
+  `).join('');
+}
+// ---------------- NUEVA ORDEN ----------------
+function renderNuevaOrden(c) {
+  c.innerHTML = `
+    <div class="card">
+      <div class="card-hdr">
+        <div>
+          <div class="card-title">Nueva Orden Médica (Equivalente Digital Form 599)</div>
+          <div class="card-sub">Complete todos los antecedentes para garantizar seguridad del paciente</div>
+        </div>
+      </div>
+      <form id="formOrden" onsubmit="guardarOrden(event)">
+        <div class="form-section">
+          <div class="form-section-title">1. Clasificación y Destino</div>
+          <div class="frow">
+            <div class="fg">
+              <label>Tipo de Solicitud <span class="req">*</span></label>
+              <select id="f_tipo_sol" required onchange="ajustarTipoEstudio(this.value)">
+                <option value="TC">Tomografía Computada (TC)</option>
+                <option value="RM">Resonancia Magnética (RM)</option>
+                <option value="PUNCION">Punción guiada por TC</option>
+                <option value="DRENAJE">Drenaje guiado por TC</option>
+                <option value="ETE">Ecocardiograma Transesofágico (ETE)</option>
+              </select>
+            </div>
+            <div class="fg">
+              <label>Tipo de Paciente <span class="req">*</span></label>
+              <div class="radio-group">
+                <label class="radio-opt"><input type="radio" name="f_tipo" value="Ambulatorio" checked onchange="toggleUbicacion(false)"> Ambulatorio</label>
+                <label class="radio-opt"><input type="radio" name="f_tipo" value="Internado" onchange="toggleUbicacion(true)"> Internado</label>
+              </div>
+            </div>
+            <div class="fg">
+              <label>Servicio Solicitante <span class="req">*</span></label>
+              <select id="f_serv" required onchange="checkServicioGuardia(this.value)">
+                ${SERVICIOS.map(s => `<option value="${s}">${s}</option>`).join('')}
+              </select>
+            </div>
+          </div>
+          <div class="frow w2" id="box_ubicacion" style="display:none;background:var(--amb-bg);padding:10px;border-radius:8px;">
+            <div class="fg">
+              <label>Sala / Pabellón <span class="req">*</span></label>
+              <input type="text" id="f_sala" placeholder="Ej: Sala 2 / Guardia">
+            </div>
+            <div class="fg">
+              <label>Cama <span class="req">*</span></label>
+              <input type="text" id="f_cama" placeholder="Ej: 14B">
+            </div>
+          </div>
+        </div>
+
+        <div class="form-section">
+          <div class="form-section-title">2. Datos del Paciente</div>
+          <div class="frow">
+            <div class="fg">
+              <label>Apellido y Nombre <span class="req">*</span></label>
+              <input type="text" id="f_nombre" required placeholder="Perez, Juan Carlos">
+            </div>
+            <div class="fg">
+              <label>DNI <span class="req">*</span></label>
+              <input type="text" id="f_dni" required placeholder="XX.XXX.XXX">
+            </div>
+            <div class="fg">
+              <label>Historia Clínica (HC)</label>
+              <input type="text" id="f_hc" placeholder="Ej: HC-12345">
+            </div>
+          </div>
+          <div class="frow">
+            <div class="fg">
+              <label>Fecha de Nacimiento</label>
+              <input type="date" id="f_fn">
+            </div>
+            <div class="fg">
+              <label>Edad</label>
+              <input type="number" id="f_edad" placeholder="Años">
+            </div>
+            <div class="fg">
+              <label>Peso Aprox. (Kg)</label>
+              <input type="number" step="0.1" id="f_peso" placeholder="Kg">
+            </div>
+            <div class="fg">
+              <label>Obra Social / Cobertura</label>
+              <input type="text" id="f_os" placeholder="PAMI, IAPOS, Ninguna...">
+            </div>
+          </div>
+          <div class="frow">
+            <div class="fg">
+              <label>Domicilio</label>
+              <input type="text" id="f_dom">
+            </div>
+            <div class="fg">
+              <label>Localidad</label>
+              <input type="text" id="f_loc" value="Granadero Baigorria">
+            </div>
+            <div class="fg">
+              <label>Teléfono de Contacto</label>
+              <input type="tel" id="f_tel" placeholder="341-XXXXXXX">
+            </div>
+          </div>
+        </div>
+
+        <div class="form-section">
+          <div class="form-section-title">3. Estudio y Justificación Médica</div>
+          <div class="frow">
+            <div class="fg">
+              <label>Estudio Solicitado (Región/Tipo) <span class="req">*</span></label>
+              <input type="text" id="f_est1" required placeholder="Ej: RM de Cerebro / TC de Tórax">
+            </div>
+            <div class="fg">
+              <label>Estudio Adicional / Simultáneo</label>
+              <input type="text" id="f_est2" placeholder="Opcional">
+            </div>
+          </div>
+          <div class="frow w2">
+            <div class="fg">
+              <label>¿Requiere Contraste EV? <span class="req">*</span></label>
+              <select id="f_contraste">
+                <option value="No">No</option>
+                <option value="Sí">Sí</option>
+              </select>
+            </div>
+            <div class="fg">
+              <label>¿Requiere Soporte de Anestesia? <span class="req">*</span></label>
+              <select id="f_anest">
+                <option value="No">No</option>
+                <option value="Sí">Sí (Se creará alerta en agenda de Anestesia)</option>
+              </select>
+            </div>
+          </div>
+          <div class="frow">
+            <div class="fg">
+              <label>Diagnóstico Presuntivo / Motivo Clínico <span class="req">*</span></label>
+              <textarea id="f_motivo" required placeholder="Describa el cuadro clínico que justifica el estudio..."></textarea>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-section">
+          <div class="form-section-title">4. Checklist de Seguridad (Crítico)</div>
+          <div class="frow w2">
+            <div class="fg">
+              <label>¿Posee implantes metálicos, marcapasos o prótesis? <span class="req">*</span></label>
+              <select id="f_impl" onchange="toggleImplantes(this.value)">
+                <option value="No">No</option>
+                <option value="Sí">Sí (¡ALERTA ROJA!)</option>
+              </select>
+            </div>
+            <div class="fg" id="box_impl_det" style="display:none;">
+              <label>Especifique material y compatibilidad <span class="req">*</span></label>
+              <input type="text" id="f_implC" placeholder="Ej: Stent carotídeo 2021 compatible 1.5T">
+            </div>
+          </div>
+          <div class="frow w2">
+            <div class="fg">
+              <label>¿Antecedente de Asma o Alergia Severa?</label>
+              <select id="f_asma">
+                <option value="No">No</option>
+                <option value="Sí">Sí (Alerta ámbar para contraste)</option>
+              </select>
+            </div>
+            <div class="fg">
+              <label>¿Enfermedad Renal conocida?</label>
+              <select id="f_renal" onchange="toggleRenal(this.value)">
+                <option value="No">No</option>
+                <option value="Sí">Sí</option>
+              </select>
+            </div>
+          </div>
+          <div class="frow w2" id="box_renal_det" style="display:none;">
+            <div class="fg">
+              <label>Detalle Renal / Clearance si posee</label>
+              <input type="text" id="f_renalC" placeholder="Creatinina / Estadio">
+            </div>
+          </div>
+          <div class="frow w2">
+            <div class="fg">
+              <label>Claustrofobia</label>
+              <select id="f_claus">
+                <option value="No">No</option>
+                <option value="Sí">Sí</option>
+              </select>
+            </div>
+            <div class="fg">
+              <label>¿RM Previa?</label>
+              <select id="f_rmPrev">
+                <option value="No">No</option>
+                <option value="Sí">Sí</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-section">
+          <div class="form-section-title">5. Médico Solicitante</div>
+          <div class="frow">
+            <div class="fg">
+              <label>Médico Solicitante / Matrícula <span class="req">*</span></label>
+              <input type="text" id="f_medico" required value="Dr. Solicitante General (M.P. 18452)">
+            </div>
+            <div class="fg">
+              <label>Firma / Suscripción</label>
+              <input type="text" readonly value="[Firma electrónica suscripta por médico autenticado]" style="background:var(--bd2)">
+            </div>
+          </div>
+        </div>
+
+        <div class="btns" style="justify-content:flex-end;margin-top:20px;">
+          <button type="button" class="btn btn-ghost" onclick="irA('dashboard')">Cancelar</button>
+          <button type="submit" class="btn btn-pri btn-lg">💾 Guardar Orden Digital y Generar PDF</button>
+        </div>
+      </form>
+    </div>
+  `;
+}
+
+function toggleUbicacion(isInternado) {
+  $('box_ubicacion').style.display = isInternado ? 'grid' : 'none';
+  $('f_sala').required = isInternado;
+  $('f_cama').required = isInternado;
+}
+function checkServicioGuardia(serv) {
+  if (serv === 'Guardia') {
+    document.querySelector('input[name="f_tipo"][value="Internado"]').checked = true;
+    toggleUbicacion(true);
+    $('f_sala').value = 'Guardia';
+  }
+}
+function toggleImplantes(v) {
+  const box = $('box_impl_det');
+  box.style.display = v === 'Sí' ? 'flex' : 'none';
+  $('f_implC').required = v === 'Sí';
+}
+function toggleRenal(v) {
+  $('box_renal_det').style.display = v === 'Sí' ? 'grid' : 'none';
+}
+function ajustarTipoEstudio(v) {
+  if (v === 'PUNCION') $('f_est1').value = 'Punción guiada por TC';
+  if (v === 'DRENAJE') $('f_est1').value = 'Drenaje guiado por TC';
+  if (v === 'ETE') $('f_est1').value = 'Ecocardiograma Transesofágico';
+}
+
+function guardarOrden(e) {
+  e.preventDefault();
+  const tipoPac = document.querySelector('input[name="f_tipo"]:checked').value;
+  const isImpl = $('f_impl').value === 'Sí';
+  const implC = $('f_implC').value.trim();
+
+  if (isImpl && !implC) {
+    alert('Debe especificar los detalles del implante metálico.');
+    return;
+  }
+
+  const nueva = {
+    id: 'ord_' + Date.now(),
+    num: '2026-' + String(ORDENES.length + 1).padStart(3, '0'),
+    f: hoy(),
+    tipo_sol: $('f_tipo_sol').value,
+    tipo: tipoPac,
+    serv: $('f_serv').value,
+    sala: $('f_sala')?.value || '',
+    cama: $('f_cama')?.value || '',
+    nombre: $('f_nombre').value.toUpperCase(),
+    dni: $('f_dni').value,
+    hc: $('f_hc').value,
+    fn: $('f_fn').value,
+    edad: $('f_edad').value,
+    peso: $('f_peso').value,
+    os: $('f_os').value,
+    dom: $('f_dom').value,
+    loc: $('f_loc').value,
+    tel: $('f_tel').value,
+    est1: $('f_est1').value,
+    est2: $('f_est2').value,
+    contraste: $('f_contraste').value,
+    anest: $('f_anest').value,
+    motivo: $('f_motivo').value,
+    impl: isImpl ? 'Sí' : 'No',
+    implC: implC,
+    asma: $('f_asma').value,
+    renal: $('f_renal').value,
+    renalC: $('f_renalC')?.value || '',
+    claus: $('f_claus').value,
+    rmPrev: $('f_rmPrev').value,
+    medico: $('f_medico').value,
+    estado: 'Pendiente',
+    visAnes: $('f_anest').value === 'Sí' ? false : true,
+    h: [{ts: nowStr(), u: ROL.toUpperCase(), m: 'Orden médica generada y suscripta por médico'}]
+  };
+
+  ORDENES.push(nueva);
+  guardarDatos();
+  toast('Orden generada con éxito y almacenada con hash SHA-256 simulado', 'ok');
+  verDetalle(nueva.id);
+}
+// ---------------- COLAS Y DETALLES ----------------
+function renderCola(c, tipo) {
+  const lista = ORDENES.filter(o => o.tipo === tipo);
+  c.innerHTML = `
+    <div class="card">
+      <div class="card-hdr">
+        <div>
+          <div class="card-title">Cola de ${tipo}s</div>
+          <div class="card-sub">${tipo === 'Ambulatorio' ? 'Gestionada por Secretaría' : 'Gestionada por Sala de Médicos / Diagnóstico'}</div>
+        </div>
+      </div>
+      <div class="filter-bar">
+        <select id="filtro_est" onchange="filtrarCola('${tipo}')">
+          <option value="">Todos los Estados</option>
+          ${ESTADOS.map(e => `<option value="${e}">${e}</option>`).join('')}
+        </select>
+        <select id="filtro_serv" onchange="filtrarCola('${tipo}')">
+          <option value="">Todos los Servicios</option>
+          ${SERVICIOS.map(s => `<option value="${s}">${s}</option>`).join('')}
+        </select>
+      </div>
+      <div id="contenedor_cola">
+        ${renderListaOrdenes(lista)}
+      </div>
+    </div>
+  `;
+}
+
+function filtrarCola(tipo) {
+  const est = $('filtro_est').value;
+  const serv = $('filtro_serv').value;
+  let res = ORDENES.filter(o => o.tipo === tipo);
+  if (est) res = res.filter(o => o.estado === est);
+  if (serv) res = res.filter(o => o.serv === serv);
+  $('contenedor_cola').innerHTML = renderListaOrdenes(res);
+}
+
+function verDetalle(id) {
+  DETALLE_ID = id;
+  const o = ORDENES.find(x => x.id === id);
+  if (!o) return;
+  const c = $('mainContent');
+
+  c.innerHTML = `
+    <div class="card">
+      <div class="card-hdr">
+        <div>
+          <button class="btn btn-ghost btn-sm" onclick="DETALLE_ID=null;render();">← Volver</button>
+          <div class="card-title" style="margin-top:8px;">Orden ${esc(o.num)} · ${esc(o.nombre)}</div>
+          <div class="card-sub">DNI ${esc(o.dni)} · HC: ${esc(o.hc||'S/D')} · Servicio: ${esc(o.serv)} (${esc(o.tipo)})</div>
+        </div>
+        <div style="text-align:right;">
+          ${badgeEstado(o.estado)}
+          <div class="sm mu" style="margin-top:4px;">Creada: ${esc(o.f)}</div>
+        </div>
+      </div>
+
+      ${alertasSeguridad(o)}
+
+      ${o.turno ? `
+        <div class="turno-box">
+          <strong>📅 Turno Asignado: ${formatFecha(o.turno.fecha)} a las ${o.turno.hora} hs</strong>
+          <span>Modalidad: ${esc(o.turno.mod)} · Franja: ${tagFranja(o.turno.franja)}</span>
+        </div>
+      ` : ''}
+
+      <div class="form-section">
+        <div class="form-section-title">Detalles del Estudio y Datos Clínicos</div>
+        <dl class="dl-grid">
+          <dt>Estudio:</dt><dd><strong>${esc(o.est1)}</strong> ${o.est2 ? ' / '+esc(o.est2) : ''}</dd>
+          <dt>Tipo Solicitud:</dt><dd>${esc(o.tipo_sol||'Estándar')}</dd>
+          <dt>Contraste EV:</dt><dd>${esc(o.contraste)}</dd>
+          <dt>Anestesia:</dt><dd>${esc(o.anest)}</dd>
+          <dt>Ubicación:</dt><dd>${o.tipo === 'Internado' ? `Sala: ${esc(o.sala||'-')}, Cama: ${esc(o.cama||'-')}` : 'Ambulatorio'}</dd>
+          <dt>Motivo Clínico:</dt><dd>${esc(o.motivo)}</dd>
+          <dt>Médico Solicitante:</dt><dd>${esc(o.medico)}</dd>
+        </dl>
+      </div>
+
+      <div class="form-section">
+        <div class="form-section-title">Acciones sobre la Orden</div>
+        <div class="btns">
+          ${o.estado === 'Pendiente' ? `
+            <button class="btn btn-pri" onclick="abrirModalTurno('${o.id}')">📅 Asignar Turno Grilla</button>
+          ` : ''}
+          ${o.estado === 'Turno asignado' ? `
+            <button class="btn btn-sec" onclick="abrirModalTurno('${o.id}')">🔄 Reprogramar Turno</button>
+            <button class="btn btn-grn" onclick="cambiarEstado('${o.id}', 'Realizado')">✅ Marcar Realizado</button>
+            <button class="btn btn-red" onclick="cambiarEstado('${o.id}', 'Suspendida')">🚫 Suspender</button>
+            <button class="btn btn-ghost" onclick="cambiarEstado('${o.id}', 'Ausente')">⚠️ Paciente Ausente</button>
+          ` : ''}
+          <button class="btn btn-ghost" onclick="simularDescargaPDF('${o.id}')">📄 Ver Comprobante PDF (Form 599)</button>
+        </div>
+      </div>
+
+      <div class="form-section">
+        <div class="form-section-title">Historial y Auditoría de Cambios</div>
+        <div>
+          ${(o.h||[]).map(hi => `
+            <div class="hist-item">
+              <div class="hist-dot"></div>
+              <div style="flex:1;">
+                <div><strong>${esc(hi.u)}</strong>: ${esc(hi.m)}</div>
+                <div class="hist-ts">${esc(hi.ts)}</div>
+              </div>
+            </div>
+          `).join('')}
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+function cambiarEstado(id, nuevo) {
+  const o = ORDENES.find(x => x.id === id);
+  if (!o) return;
+  const mot = prompt(`Ingrese motivo para cambiar a ${nuevo}:`);
+  if (mot === null) return;
+  o.estado = nuevo;
+  o.h.push({ts: nowStr(), u: ROL.toUpperCase(), m: `Cambio de estado a ${nuevo}: ${mot || 'Sin observaciones'}`});
+  if (nuevo === 'Suspendida' || nuevo === 'Cancelada') {
+    o.turno = null;
+  }
+  guardarDatos();
+  toast(`Orden actualizada a ${nuevo}`, 'ok');
+  verDetalle(id);
+}
+
+function simularDescargaPDF(id) {
+  const o = ORDENES.find(x => x.id === id);
+  alert(`[SIMULACIÓN PDF COMPROBANTE]\n\nFormulario 599 generado digitalmente.\nPaciente: ${o.nombre}\nEstudio: ${o.est1}\nContraste: ${o.contraste}\nAnestesia: ${o.anest}\nMédico: ${o.medico}\nFirma: Suscripción digital confirmada\nHash SHA-256: 7f83b1657ff1fc53b92dc18148a1d65dfc2d4b1fa3d677284addd200126d9069\n\nEl documento queda resguardado en almacenamiento inmutable.`);
+}
+// ---------------- SELECTOR DE TURNO (GRILLA) ----------------
+let FECHA_TURNO_SEL = hoy();
+
+function abrirModalTurno(id) {
+  TURNO_PENDIENTE = ORDENES.find(x => x.id === id);
+  FECHA_TURNO_SEL = hoy();
+  renderModalTurno();
+}
+
+function renderModalTurno() {
+  const o = TURNO_PENDIENTE;
+  if (!o) return;
+  const mod = modalidadOrden(o);
+  const frReq = franjaRequerida(o);
+  const franjas = getFranjasDisponibles(o, FECHA_TURNO_SEL);
+
+  $('modals').innerHTML = `
+    <div class="modal-bg">
+      <div class="modal">
+        <div class="modal-hdr">
+          <h2>Asignación de Turno en Grilla Real</h2>
+          <button class="modal-close" onclick="$('modals').innerHTML=''">✕</button>
+        </div>
+        <div class="modal-body">
+          <div class="card" style="margin-bottom:12px;">
+            <div><strong>Paciente:</strong> ${esc(o.nombre)} (${esc(o.tipo)})</div>
+            <div><strong>Estudio:</strong> ${esc(o.est1)} · <strong>Modalidad:</strong> ${mod}</div>
+            <div><strong>Franja Requerida:</strong> ${frReq ? tagFranja(frReq) : '<span class=\"franja-tag libre\">Libre / Sin Grilla</span>'}</div>
+            ${o.tipo === 'Internado' ? `<div class=\"sm mu\">Paciente internado: Puede ocupar franjas 'RESERVADO INTERNADO'.</div>` : ''}
+          </div>
+
+          <div class="fg" style="margin-bottom:16px;">
+            <label>Seleccionar Fecha de Turno:</label>
+            <input type="date" value="${FECHA_TURNO_SEL}" min="${hoy()}" onchange="FECHA_TURNO_SEL=this.value;renderModalTurno();">
+          </div>
+
+          <div class="card-title">Franjas Disponibles para ${formatFecha(FECHA_TURNO_SEL)}:</div>
+          <div style="margin-top:10px;">
+            ${!franjas.length ? `<div class="empty"><p>No hay franjas libres que coincidan con los requerimientos clínicos en esta fecha.</p></div>` : `
+              <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:8px;">
+                ${franjas.map(f => `
+                  <button class="btn btn-sec btn-sm" style="flex-direction:column;align-items:flex-start;padding:8px;" onclick="confirmarTurno('${f.hora}', '${f.franja}', '${mod}')">
+                    <strong style="font-size:14px;">${f.hora} hs</strong>
+                    ${tagFranja(f.franja)}
+                  </button>
+                `).join('')}
+              </div>
+            `}
+          </div>
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+function confirmarTurno(hora, franja, mod) {
+  const o = TURNO_PENDIENTE;
+  if (!o) return;
+  o.turno = {
+    fecha: FECHA_TURNO_SEL,
+    hora: hora,
+    franja: franja,
+    mod: mod
+  };
+  o.estado = 'Turno asignado';
+  o.h.push({ts: nowStr(), u: ROL.toUpperCase(), m: `Turno asignado: ${mod} el ${formatFecha(FECHA_TURNO_SEL)} a las ${hora} hs (Franja: ${franja})`});
+  guardarDatos();
+  $('modals').innerHTML = '';
+  toast(`Turno asignado con éxito: ${formatFecha(FECHA_TURNO_SEL)} ${hora} hs`, 'ok');
+  verDetalle(o.id);
+}
+
+// ---------------- AGENDA DEL DÍA ----------------
+let AGENDA_MOD = 'TC';
+let AGENDA_FECHA = hoy();
+
+function renderAgenda(c) {
+  const filtrados = ORDENES.filter(o => o.turno && o.turno.fecha === AGENDA_FECHA && o.turno.mod === AGENDA_MOD && o.estado === 'Turno asignado');
+  filtrados.sort((a,b) => a.turno.hora.localeCompare(b.turno.hora));
+
+  c.innerHTML = `
+    <div class="card">
+      <div class="card-hdr">
+        <div class="card-title">Agenda Diaria de Estudios</div>
+      </div>
+      <div class="filter-bar">
+        <input type="date" value="${AGENDA_FECHA}" onchange="AGENDA_FECHA=this.value;renderAgenda($('mainContent'));">
+        <button class="btn ${AGENDA_MOD==='TC'?'btn-pri':'btn-ghost'}" onclick="AGENDA_MOD='TC';renderAgenda($('mainContent'));">TC (Tomografía)</button>
+        <button class="btn ${AGENDA_MOD==='RM'?'btn-pri':'btn-ghost'}" onclick="AGENDA_MOD='RM';renderAgenda($('mainContent'));">RM (Resonancia)</button>
+      </div>
+
+      <div style="margin-top:16px;">
+        ${!filtrados.length ? `<div class="empty"><div class="empty-icon">📅</div><p>No hay turnos asignados para ${AGENDA_MOD} en esta fecha.</p></div>` : 
+          filtrados.map(o => `
+            <div class="agenda-item">
+              <div class="agenda-hora">
+                ${o.turno.hora}
+                <small>hs</small>
+              </div>
+              <div class="agenda-det">
+                <div style="display:flex;justify-content:space-between;">
+                  <strong>${esc(o.nombre)}</strong>
+                  <span class="sm mu">${esc(o.tipo)}</span>
+                </div>
+                <div class="sm">${esc(o.est1)} · ${tagFranja(o.turno.franja)}</div>
+                ${o.tipo==='Internado'?`<div class="sm" style="color:var(--amb);font-weight:bold;">🛏️ Sala: ${esc(o.sala||'-')} | Cama: ${esc(o.cama||'-')}</div>`:''}
+                ${alertasSeguridad(o)}
+              </div>
+            </div>
+          `).join('')
+        }
+      </div>
+    </div>
+  `;
+}
+
+// ---------------- PANEL DE ANESTESIA ----------------
+function renderAnestesia(c) {
+  const anestList = ORDENES.filter(o => o.anest === 'Sí');
+  c.innerHTML = `
+    <div class="card">
+      <div class="card-hdr">
+        <div>
+          <div class="card-title">Panel de Control de Anestesiología</div>
+          <div class="card-sub">Supervisión de procedimientos con requerimiento de sedación o anestesia general</div>
+        </div>
+        <button class="wapp-btn" onclick="copiarWhatsAppAnestesia()">📋 Copiar Resumen WhatsApp</button>
+      </div>
+
+      <div style="margin-top:14px;">
+        ${!anestList.length ? `<div class="empty"><p>No hay órdenes con solicitud de anestesia.</p></div>` :
+          anestList.map(o => `
+            <div class="card" style="border-left:4px solid #8e44ad;margin-bottom:8px;">
+              <div style="display:flex;justify-content:space-between;align-items:flex-start;">
+                <div>
+                  <strong>${esc(o.nombre)}</strong> (DNI ${esc(o.dni)})
+                  <div class="sm mu">${esc(o.serv)} · ${esc(o.tipo)} ${o.tipo==='Internado'?`[${esc(o.sala)} / ${esc(o.cama)}]`:''}</div>
+                  <div class="sm">Estudio: <strong>${esc(o.est1)}</strong></div>
+                </div>
+                <div>
+                  ${badgeEstado(o.estado)}
+                </div>
+              </div>
+              <div style="margin-top:8px;font-size:13px;">
+                ${o.turno ? `📅 <strong>Turno: ${formatFecha(o.turno.fecha)} a las ${o.turno.hora} hs</strong> (${esc(o.turno.mod)})` : `<em>Sin turno asignado aún</em>`}
+              </div>
+              <div style="display:flex;justify-content:flex-end;margin-top:8px;">
+                ${o.visAnes === false ? `
+                  <button class="btn btn-pri btn-sm" onclick="marcarEnteradoAnestesia('${o.id}')">✓ Marcar Enterado</button>
+                ` : `<span class="sm ok">✓ Notificación enterada por Anestesia</span>`}
+              </div>
+            </div>
+          `).join('')
+        }
+      </div>
+    </div>
+  `;
+}
+
+function marcarEnteradoAnestesia(id) {
+  const o = ORDENES.find(x => x.id === id);
+  if (!o) return;
+  o.visAnes = true;
+  o.h.push({ts: nowStr(), u: 'ANESTESIA', m: 'Enterado de solicitud de anestesia'});
+  guardarDatos();
+  toast('Novedad confirmada por Anestesia', 'ok');
+  renderAnestesia($('mainContent'));
+}
+
+function copiarWhatsAppAnestesia() {
+  const lista = ORDENES.filter(o => o.anest === 'Sí');
+  let texto = `*HOSPITAL EVA PERÓN - SDI*\n*PARTE DE ANESTESIA (TC/RM)*\nFecha: ${hoy()}\n--------------------\n`;
+  lista.forEach(o => {
+    texto += `• Paciente: ${o.nombre} (${o.tipo})\n  Estudio: ${o.est1}\n  Turno: ${o.turno ? o.turno.fecha+' '+o.turno.hora+'hs' : 'PENDIENTE'}\n  Ubicación: ${o.tipo==='Internado' ? o.sala+' Cama '+o.cama : 'Ambulatorio'}\n\n`;
+  });
+  navigator.clipboard.writeText(texto).then(() => {
+    toast('Resumen copiado para WhatsApp', 'ok');
+  }).catch(() => {
+    alert(texto);
+  });
+}
+
+// ---------------- REPORTE DE DEMANDA (ADMIN) ----------------
+function renderDemanda(c) {
+  const conteo = {};
+  SERVICIOS.forEach(s => conteo[s] = 0);
+  ORDENES.forEach(o => {
+    if (conteo[o.serv] !== undefined) conteo[o.serv]++;
+    else conteo[o.serv] = 1;
+  });
+
+  c.innerHTML = `
+    <div class="card">
+      <div class="card-hdr">
+        <div class="card-title">Demanda por Servicio Solicitante</div>
+        <div class="card-sub">Métrica de carga asistencial generada hacia Diagnóstico por Imágenes</div>
+      </div>
+      <div class="tbl-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Servicio</th>
+              <th>Órdenes Generadas</th>
+              <th>Proporción</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${SERVICIOS.map(s => `
+              <tr>
+                <td><strong>${s}</strong></td>
+                <td>${conteo[s] || 0}</td>
+                <td>
+                  <div style="background:var(--bd2);height:8px;border-radius:4px;overflow:hidden;width:100%;max-width:200px;">
+                    <div style="background:var(--pri);height:100%;width:${(conteo[s]/Math.max(1, ORDENES.length))*100}%"></div>
+                  </div>
+                </td>
+              </tr>
+            `).join('')}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  `;
+}
+
+function toggleTheme() {
+  const cur = document.documentElement.getAttribute('data-theme');
+  const next = cur === 'dark' ? 'light' : 'dark';
+  document.documentElement.setAttribute('data-theme', next);
+}
+
+// ===================== INICIALIZACIÓN =====================
+window.addEventListener('DOMContentLoaded', () => {
+  cargarDatos();
+  render();
+});
+</script>
+</body>
+</html>
