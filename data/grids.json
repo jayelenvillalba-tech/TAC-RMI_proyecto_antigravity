@@ -1,4 +1,4 @@
-﻿{
+{
   "version": "1.0",
   "note": "Grillas de turnos representativas. Coordinar con el servicio para ajustar horarios reales.",
   "franjas_validas": ["SIN CONTRASTE","CON CONTRASTE","SIN GADOLINIO","CON GADOLINIO","ANESTESIA","PUNCION","DRENAJES","RESERVADO INTERNADO","NO DAR","ALMUERZO","CENA"],
