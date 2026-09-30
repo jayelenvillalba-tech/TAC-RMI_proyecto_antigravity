@@ -1,8 +1,10 @@
 {
+  "/_not-found/page": "app/_not-found/page.js",
   "/api/appointments/route": "app/api/appointments/route.js",
   "/api/audit/route": "app/api/audit/route.js",
   "/api/orders/[id]/pdf/route": "app/api/orders/[id]/pdf/route.js",
   "/api/orders/route": "app/api/orders/route.js",
   "/api/slots/route": "app/api/slots/route.js",
-  "/api/test-concurrency/route": "app/api/test-concurrency/route.js"
+  "/api/test-concurrency/route": "app/api/test-concurrency/route.js",
+  "/page": "app/page.js"
 }

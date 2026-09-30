@@ -1,1 +1,1 @@
-{"/api/appointments/route":"/api/appointments","/api/audit/route":"/api/audit","/api/orders/[id]/pdf/route":"/api/orders/[id]/pdf","/api/orders/route":"/api/orders","/api/slots/route":"/api/slots","/api/test-concurrency/route":"/api/test-concurrency"}
+{"/_not-found/page":"/_not-found","/api/appointments/route":"/api/appointments","/api/audit/route":"/api/audit","/api/orders/[id]/pdf/route":"/api/orders/[id]/pdf","/api/orders/route":"/api/orders","/api/slots/route":"/api/slots","/api/test-concurrency/route":"/api/test-concurrency","/page":"/"}
